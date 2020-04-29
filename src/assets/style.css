@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'Vazir';
+    font-style: normal;
+    font-weight: normal;
+    src: url('fonts/Vazir.eot');
+    /* IE9 Compat Modes */
+    src: local('Vazir'), local('Vazir'),
+        url('fonts/Vazir.eot') format('embedded-opentype'),
+        /* IE6-IE8 */ url('fonts/Vazir.woff2') format('woff2'),
+        /* Super Modern Browsers */ url('fonts/Vazir.woff') format('woff'),
+        /* Modern Browsers */ url('fonts/Vazir.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: 'Vazir';
+    font-style: normal;
+    font-weight: bold;
+    src: url('fonts/Vazir-Bold.eot');
+    /* IE9 Compat Modes */
+    src: local('Vazir-Bold'), local('Vazir-Bold'),
+        url('fonts/Vazir-Bold.eot') format('embedded-opentype'),
+        /* IE6-IE8 */ url('fonts/Vazir-Bold.woff2') format('woff2'),
+        /* Super Modern Browsers */ url('fonts/Vazir-Bold.woff') format('woff'),
+        /* Modern Browsers */ url('fonts/Vazir-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+body {
+    background-color: white !important;
+}
+
+* {
+    font-family: 'Vazir' !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.indexhead {
+    display: block;
+    background: #fff;
+    color: #090909;
+    height: 100vh;
+    text-align: left;
+    background-color: #fff;
+    background-image: url('img/1.JPG');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.indexcontainer {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.rtl {
+    direction: rtl !important;
+}
+.text-white {
+    color: white !important;
+}
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.indexhead .intro-text {
+    padding-bottom: 100px;
+    padding-top: 50vh !important;
+}
+
+.intro-text > h1 {
+    font-size: 40px;
+    font-weight: 700 !important;
+}
+
+.intro-text > p {
+    font-size: 18px !important;
+}
+
+@media (min-width: 768px) {
+    .indexhead .intro-text {
+        padding-bottom: 100px;
+        padding-top: 50vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .indexhead {
+        background-image: url('img/12.JPG');
+    }
+    .indexhead .intro-text {
+        padding-top: 30vh !important;
+    }
+    .text-mobile {
+        color: #090909 !important;
+    }
+}
+
+.flink {
+    font-size: 90%;
+    font-weight: 700;
+}
+
+.aboutBtn {
+    margin-top: 20px !important;
+    background-color: #01a19a !important;
+}
+
+.aboutBtn:hover {
+    background-color: #004d40 !important;
+}
+
+.bgPrimary {
+    background-color: #01a19a !important;
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.dirRtl {
+    direction: rtl !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.margin-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.h-color {
+    color: rgba(229, 57, 53, 1);
+}
+
+.iranserverbg {
+    background-color: #027974 !important;
+}
+
+.MainContainer {
+    padding: 2% 9.7% 0% 10% !important;
+}
+
+.ml10 {
+    margin: 0px 10px !important;
+}
+
+.font15 {
+    font-size: 15px !important;
+}
+
+.font20 {
+    font-size: 20px !important;
+}
+
+.maxwidth100 {
+    max-width: 100% !important;
+}
