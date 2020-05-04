@@ -10,7 +10,6 @@ import {
     CardActionArea,
     CardContent,
     Typography,
-    Link as MaterialLink,
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
@@ -76,7 +75,6 @@ const Home = () => {
     const isTabletOrMobileDevice = useMediaQuery({
         query: '(max-device-width: 1224px)',
     })
-    console.log(isTabletOrMobileDevice)
     const classes = useStyle()
     return (
         <Fragment>
@@ -213,7 +211,11 @@ const Home = () => {
                 </h2>
                 <Grid className={classes.ptb20} container spacing={2}>
                     <Grid item sm={4}>
-                        <a href="https://mailchimp.com/" target="_blank">
+                        <a
+                            href="https://mailchimp.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <img
                                 src={MailChimp}
                                 className={classes.maxwidth100}
@@ -222,7 +224,11 @@ const Home = () => {
                         </a>
                     </Grid>
                     <Grid item sm={4}>
-                        <a href="https://wordpress.com/" target="_blank">
+                        <a
+                            href="https://wordpress.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <img
                                 src={WordPress}
                                 className={classes.maxwidth100}
@@ -231,7 +237,11 @@ const Home = () => {
                         </a>
                     </Grid>
                     <Grid item sm={4}>
-                        <a href="https://basecamp.com/" target="_blank">
+                        <a
+                            href="https://basecamp.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <img
                                 src={Basecamp}
                                 className={classes.maxwidth100}

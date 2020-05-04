@@ -7,35 +7,34 @@ import {
 const initialState = {
     eventsContent: [],
     loadign: false,
-    error=""
+    error: '',
 }
 
-
-const eventsReducer = (state = initialState, action) =>{
+const eventsReducer = (state = initialState, action) => {
     switch (action.type) {
         case EVENTS_CONTENT_REQ:
-            return{
+            return {
                 ...state,
-                loading: true
+                loading: true,
             }
         case EVENTS_CONTENT_SUCCESS:
-            return{
+            return {
                 ...state,
                 loadign: false,
                 eventsContent: action.payload,
-                error: ""
+                error: '',
             }
-        case EVENTS_CONTENT_FAIL:{
-            return{
+        case EVENTS_CONTENT_FAIL: {
+            return {
                 ...state,
                 loadign: false,
                 eventsContent: [],
-                error: action.error
+                error: action.error,
             }
         }
         default:
             return {
-                state
+                state,
             }
     }
 }
