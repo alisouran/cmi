@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {
     AppBar,
     Toolbar,
@@ -8,14 +8,21 @@ import {
     Grid,
     BottomNavigationAction,
     BottomNavigation,
+    Drawer,
+    ListItem,
+    List,
+    ListItemIcon,
+    ListItemText,
 } from '@material-ui/core'
 import Instagram from '@material-ui/icons/Instagram'
+
 import Telegram from '@material-ui/icons/Telegram'
 import Twitter from '@material-ui/icons/Twitter'
 import Facebook from '@material-ui/icons/Facebook'
+import EventNote from '@material-ui/icons/EventRounded'
 import { Logo } from '../assets/img/Img'
 import './../assets/style.css'
-import { Link, Switch, Route } from 'react-router-dom'
+import { Link, Switch, Route, useHistory } from 'react-router-dom'
 import Events from './Events'
 import Home from './Home'
 import Reg from './Reg'
@@ -23,16 +30,19 @@ import Join from './Join'
 import Suggestion from './Suggestion'
 import Contact from './Contact'
 import { useMediaQuery } from 'react-responsive'
-import FolderIcon from '@material-ui/icons/Folder'
-import RestoreIcon from '@material-ui/icons/Restore'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
+import Notes from '@material-ui/icons/NotesRounded'
+import { FiHome, FiCalendar, FiZap, FiHelpCircle } from 'react-icons/fi'
+import Deck from '@material-ui/icons/DeckRounded'
+import Team from './Team'
+import QuestionAnswer from './other/QuestionAnswer'
 
 const useStyle = makeStyles({
     AppBar: {
         backgroundColor: 'white',
         minHeight: '74px !important',
         boxShadow: '0px -2px 3px gray !important',
+        paddingBottom: '5px',
+        paddingTop: '5px',
     },
     toolbar: {
         minHeight: '74px !important',
@@ -96,9 +106,27 @@ const useStyle = makeStyles({
         position: 'fixed',
         bottom: 0,
     },
+    zIndexTop: {
+        zIndex: 9999999999,
+    },
 })
 
 const App = (props) => {
+    const match = useHistory()
+    const [state, setState] = React.useState({
+        right: false,
+    })
+
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (
+            event.type === 'keydown' &&
+            (event.key === 'Tab' || event.key === 'Shift')
+        ) {
+            return
+        }
+
+        setState({ ...state, [anchor]: open })
+    }
     const classes = useStyle()
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-device-width: 1224px)',
@@ -106,11 +134,24 @@ const App = (props) => {
     const isTabletOrMobileDevice = useMediaQuery({
         query: '(max-device-width: 1224px)',
     })
-    const [value, setValue] = React.useState('recents')
+    const [value, setValue] = React.useState('home')
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
     }
+    useEffect(() => {
+        const path = match.location.pathname
+
+        const slug = path.substring(path.lastIndexOf('/') + 1)
+
+        if (slug === 'events') {
+            setValue('events')
+        } else if (slug === 'home') {
+            setValue('home')
+        } else if (slug === 'reg') {
+            setValue('reg')
+        }
+    }, [match.location])
     return (
         <React.Fragment>
             {isDesktopOrLaptop && (
@@ -193,6 +234,9 @@ const App = (props) => {
                                 <Link className={classes.navItem} to="/join">
                                     همکاری با صبح‌خلاق
                                 </Link>
+                                <Link className={classes.navItem} to="/team">
+                                    تیم خلاق ما
+                                </Link>
                                 <Link
                                     className={classes.navItem}
                                     to="/suggestion"
@@ -220,37 +264,57 @@ const App = (props) => {
                     <BottomNavigation
                         value={value}
                         onChange={handleChange}
-                        className={classes.root}
+                        className={[classes.root, classes.zIndexTop].join(' ')}
                     >
                         <BottomNavigationAction
-                            label="Recents"
-                            value="recents"
-                            icon={<RestoreIcon />}
+                            label="خانه"
+                            value="home"
+                            icon={<FiHome className="icon-size" />}
                             component={Link}
                             to="/"
                         />
                         <BottomNavigationAction
-                            label="Favorites"
-                            value="favorites"
-                            icon={<FavoriteIcon />}
+                            label="رویدادها"
+                            value="events"
+                            icon={<FiCalendar className="icon-size" />}
                             component={Link}
                             to="/events"
                         />
                         <BottomNavigationAction
-                            label="Nearby"
-                            value="nearby"
-                            icon={<LocationOnIcon />}
+                            label="ثبت‌نام"
+                            value="reg"
+                            icon={<FiZap className="icon-size" />}
                             component={Link}
                             to="/reg"
                         />
                         <BottomNavigationAction
-                            label="Folder"
-                            value="folder"
-                            icon={<FolderIcon />}
+                            label="منو"
+                            value="other"
+                            icon={<Notes />}
                             component={Link}
-                            to="/other"
+                            onClick={toggleDrawer('right', true)}
                         />
                     </BottomNavigation>
+                    <div>
+                        <React.Fragment>
+                            <Drawer
+                                anchor={'right'}
+                                open={state['right']}
+                                onClose={toggleDrawer('right', false)}
+                            >
+                                <List>
+                                    <ListItem button component={Link} to="/q">
+                                        <ListItemIcon>
+                                            {
+                                                <FiHelpCircle className="icon-size" />
+                                            }
+                                        </ListItemIcon>
+                                        <ListItemText primary="پرسش و پاسخ" />
+                                    </ListItem>
+                                </List>
+                            </Drawer>
+                        </React.Fragment>
+                    </div>
                 </Fragment>
             )}
             <Fragment>
@@ -262,7 +326,15 @@ const App = (props) => {
                     <Route path="/reg">{<Reg />}</Route>
                     <Route path="/join">{<Join />}</Route>
                     <Route path="/suggestion">{<Suggestion />}</Route>
+                    <Route path="/team">
+                        {
+                            <Team
+                                isTabletOrMobileDevice={isTabletOrMobileDevice}
+                            />
+                        }
+                    </Route>
                     <Route path="/contact">{<Contact />}</Route>
+                    <Route path="/q">{<QuestionAnswer />}</Route>
                 </Switch>
             </Fragment>
         </React.Fragment>

@@ -14,14 +14,12 @@ export const eventContentSuccess = (data) => {
     return {
         type: EVENTS_CONTENT_SUCCESS,
         payload: data,
-        error: '',
     }
 }
 
 export const eventContentFail = (error) => {
     return {
         type: EVENTS_CONTENT_FAIL,
-        payload: '',
         error: error,
     }
 }

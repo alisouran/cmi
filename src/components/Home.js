@@ -1,20 +1,23 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {
     Button,
     Container,
     makeStyles,
     Grid,
     CardMedia,
-    CardActions,
     Card,
     CardActionArea,
     CardContent,
     Typography,
+    Box,
 } from '@material-ui/core'
+import Skeleton from '@material-ui/lab/Skeleton'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { Speaker12, Basecamp, WordPress, MailChimp } from '../assets/img/Img'
 import { Footer } from './other/Footer'
+import { useSelector, useDispatch } from 'react-redux'
+import fetchSpeakers from '../redux/speakers/fetchSpeakers'
 
 const useStyle = makeStyles({
     pr0: {
@@ -75,6 +78,255 @@ const Home = () => {
     const isTabletOrMobileDevice = useMediaQuery({
         query: '(max-device-width: 1224px)',
     })
+    const event = useSelector((state) => state.events)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (speakers.length === 0) {
+            event.eventsContent.map((eve) => {
+                dispatch(fetchSpeakers(eve.id, event.eventsContent.length))
+            })
+        }
+    }, [event.eventsContent.length])
+
+    const speakers = useSelector((state) => state.speakers.speakersContent)
+    const speakersLoading = useSelector((state) => state.speakers.loading)
+    var translatedPosts
+    var lastSpeakers
+    // Speakers Loader
+    if (speakersLoading === true) {
+        if (isTabletOrMobileDevice === false) {
+            const number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            lastSpeakers = number.map((nmb) => (
+                <Grid key={nmb + 'loading'} item lg={2}>
+                    <Skeleton variant="rect" height={140} sm={12} xs={12} />
+                    <Box height={60}>
+                        <Skeleton />
+                        <Skeleton width="60%" />
+                    </Box>
+                </Grid>
+            ))
+        } else {
+            const number = [1, 2, 3, 4]
+            lastSpeakers = number.map((nmb) => (
+                <Grid
+                    key={nmb + 'loadinges'}
+                    className={['w-100'].join(' ')}
+                    item
+                    sm={12}
+                >
+                    <Skeleton variant="rect" height={240} sm={12} xs={12} />
+                    <Box height={60}>
+                        <Skeleton />
+                        <Skeleton width="60%" />
+                    </Box>
+                </Grid>
+            ))
+        }
+    } else if (speakersLoading === false) {
+        if (isTabletOrMobileDevice) {
+            lastSpeakers = speakers.slice(0, 4).map((speaker) => (
+                <Grid
+                    key={speaker.id + 'speakers' + speaker.slug}
+                    item
+                    lg={2}
+                    sm={12}
+                    xs={12}
+                >
+                    <Card className={''}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={'h140'}
+                                image={[
+                                    'https://cmisfahan.ir/',
+                                    speaker.speaker_cover,
+                                ].join('')}
+                                title={speaker.title}
+                            />
+                            <CardContent>
+                                <Typography
+                                    className={['speakerName', 'rtl'].join(' ')}
+                                    gutterBottom
+                                    variant="h5"
+                                    component="p"
+                                >
+                                    {speaker.speaker_name}
+                                </Typography>
+                                <Typography
+                                    className={['rtl', 'text-center'].join(' ')}
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    {speaker.title}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            ))
+        } else {
+            lastSpeakers = speakers.slice(0, 12).map((speaker) => (
+                <Grid
+                    key={speaker.slug + 'speakers' + speaker.id}
+                    item
+                    lg={2}
+                    sm={12}
+                    xs={12}
+                >
+                    <Card className={''}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={'h140'}
+                                image={[
+                                    'https://cmisfahan.ir/',
+                                    speaker.speaker_cover,
+                                ].join('')}
+                                title={speaker.title}
+                            />
+                            <CardContent>
+                                <Typography
+                                    className={['speakerName', 'rtl'].join(' ')}
+                                    gutterBottom
+                                    variant="h5"
+                                    component="p"
+                                >
+                                    {speaker.speaker_name}
+                                </Typography>
+                                <Typography
+                                    className={['rtl', 'text-center'].join(' ')}
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    {speaker.title}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            ))
+        }
+    }
+
+    // Translated Loaders
+
+    if (speakersLoading === true) {
+        if (isTabletOrMobileDevice === false) {
+            const number = [1, 2, 3]
+            translatedPosts = number.map((nmb) => (
+                <Grid key={nmb + 'loading'} item lg={4}>
+                    <Skeleton variant="rect" height={270} sm={12} xs={12} />
+                    <Box height={60}>
+                        <Skeleton />
+                        <Skeleton width="60%" />
+                    </Box>
+                </Grid>
+            ))
+        } else {
+            const number = [1, 2, 3]
+            translatedPosts = number.map((nmb) => (
+                <Grid
+                    key={nmb + 'loadinges'}
+                    className={['w-100'].join(' ')}
+                    item
+                    sm={12}
+                >
+                    <Skeleton variant="rect" height={240} sm={12} xs={12} />
+                    <Box height={60}>
+                        <Skeleton />
+                        <Skeleton width="60%" />
+                    </Box>
+                </Grid>
+            ))
+        }
+    } else if (speakersLoading === false) {
+        if (isTabletOrMobileDevice) {
+            translatedPosts = speakers.slice(0, 4).map((speaker) => (
+                <Grid
+                    key={speaker.id + 'speakers' + speaker.slug}
+                    item
+                    lg={4}
+                    sm={12}
+                    xs={12}
+                >
+                    <Card className={''}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={'h250'}
+                                image={[
+                                    'https://cmisfahan.ir/',
+                                    speaker.speaker_cover,
+                                ].join('')}
+                                title={speaker.title}
+                            />
+                            <CardContent>
+                                <Typography
+                                    className={['speakerName', 'rtl'].join(' ')}
+                                    gutterBottom
+                                    variant="h5"
+                                    component="p"
+                                >
+                                    {speaker.speaker_name}
+                                </Typography>
+                                <Typography
+                                    className={['rtl', 'text-center'].join(' ')}
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    {speaker.title}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            ))
+        } else {
+            translatedPosts = speakers.slice(0, 3).map((speaker) => (
+                <Grid
+                    key={speaker.slug + 'speakers' + speaker.id}
+                    item
+                    lg={4}
+                    sm={12}
+                    xs={12}
+                >
+                    <Card className={''}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={'h250'}
+                                image={[
+                                    'https://cmisfahan.ir/',
+                                    speaker.speaker_cover,
+                                ].join('')}
+                                title={speaker.title}
+                            />
+                            <CardContent>
+                                <Typography
+                                    className={['translatedTitle', 'rtl'].join(
+                                        ' '
+                                    )}
+                                    gutterBottom
+                                    variant="h5"
+                                    component="p"
+                                >
+                                    {speaker.speaker_name}
+                                </Typography>
+                                <Typography
+                                    className={['rtl', 'text-center'].join(' ')}
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    {speaker.title}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            ))
+        }
+    }
+
     const classes = useStyle()
     return (
         <Fragment>
@@ -157,6 +409,7 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Container>
+
             <Container
                 className={classes.MainContainer + ' ' + classes.bgGray}
                 maxWidth="xl"
@@ -164,45 +417,24 @@ const Home = () => {
                 <h2 className={'text-center ' + classes.lastSp}>
                     سخنرانی‌های پیشین
                 </h2>
-                <Grid className={classes.ptb10} container spacing={2}>
-                    <Grid item sm={2}>
-                        <Card className={classes.root}>
-                            <CardActionArea>
-                                <CardMedia
-                                    className={classes.media}
-                                    image="/static/images/cards/contemplative-reptile.jpg"
-                                    title="Contemplative Reptile"
-                                />
-                                <CardContent>
-                                    <Typography
-                                        gutterBottom
-                                        variant="h5"
-                                        component="h2"
-                                    >
-                                        Lizard
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                        component="p"
-                                    >
-                                        Lizards are a widespread group of
-                                        squamate reptiles, with over 6,000
-                                        species, ranging across all continents
-                                        except Antarctica
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                    Share
-                                </Button>
-                                <Button size="small" color="primary">
-                                    Learn More
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
+                <Grid
+                    className={[classes.ptb10].join(' ')}
+                    container
+                    spacing={2}
+                >
+                    {lastSpeakers}
+                </Grid>
+            </Container>
+            <Container>
+                <h2 className={'text-center ' + classes.lastSp}>
+                    آخرین ترجمه‌ها
+                </h2>
+                <Grid
+                    className={[classes.ptb10].join(' ')}
+                    container
+                    spacing={1}
+                >
+                    {translatedPosts}
                 </Grid>
             </Container>
             <Container className={classes.MainContainer} maxWidth="lg">

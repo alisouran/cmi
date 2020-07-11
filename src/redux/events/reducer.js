@@ -6,7 +6,7 @@ import {
 
 const initialState = {
     eventsContent: [],
-    loadign: false,
+    loading: true,
     error: '',
 }
 
@@ -19,22 +19,21 @@ const eventsReducer = (state = initialState, action) => {
             }
         case EVENTS_CONTENT_SUCCESS:
             return {
-                ...state,
-                loadign: false,
+                loading: false,
                 eventsContent: action.payload,
                 error: '',
             }
         case EVENTS_CONTENT_FAIL: {
             return {
                 ...state,
-                loadign: false,
+                loading: false,
                 eventsContent: [],
                 error: action.error,
             }
         }
         default:
             return {
-                state,
+                ...state,
             }
     }
 }
