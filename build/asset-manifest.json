@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ce87affc.chunk.css",
+    "main.js": "/static/js/main.be200ba6.chunk.js",
+    "main.js.map": "/static/js/main.be200ba6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0348ee6a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0348ee6a.js.map",
+    "static/js/2.93f9250b.chunk.js": "/static/js/2.93f9250b.chunk.js",
+    "static/js/2.93f9250b.chunk.js.map": "/static/js/2.93f9250b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.2058825e02662da66b398140caaec2d6.js": "/precache-manifest.2058825e02662da66b398140caaec2d6.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.ce87affc.chunk.css.map": "/static/css/main.ce87affc.chunk.css.map",
+    "static/js/2.93f9250b.chunk.js.LICENSE.txt": "/static/js/2.93f9250b.chunk.js.LICENSE.txt",
+    "static/media/1.jpg": "/static/media/1.3bde74f6.jpg",
+    "static/media/style.css": "/static/media/Vazir.e5b0de94.eot",
+    "static/media/2.jpg": "/static/media/2.5ebf60ef.jpg",
+    "static/media/3.jpg": "/static/media/3.59911e34.jpg",
+    "static/media/4.jpg": "/static/media/4.dda9ccb4.jpg",
+    "static/media/ISF_BrandAssets_ChapterLogo BW.png": "/static/media/ISF_BrandAssets_ChapterLogo BW.30afeeb9.png",
+    "static/media/Mailchimp.png": "/static/media/Mailchimp.0c599114.png",
+    "static/media/aparat.svg": "/static/media/aparat.40a447d4.svg",
+    "static/media/basecamp.png": "/static/media/basecamp.26c7f238.png",
+    "static/media/creativemornings.png": "/static/media/creativemornings.073b1110.png",
+    "static/media/instagram.svg": "/static/media/instagram.7f0472ef.svg",
+    "static/media/restart.jpeg": "/static/media/restart.564af0e5.jpeg",
+    "static/media/speaker.png": "/static/media/speaker.1d1370a1.png",
+    "static/media/telegram.svg": "/static/media/telegram.24ceed93.svg",
+    "static/media/wikipedia.svg": "/static/media/wikipedia.ecebdacf.svg",
+    "static/media/wordpressdotcom.png": "/static/media/wordpressdotcom.0a835758.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0348ee6a.js",
+    "static/js/2.93f9250b.chunk.js",
+    "static/css/main.ce87affc.chunk.css",
+    "static/js/main.be200ba6.chunk.js"
+  ]
+}
